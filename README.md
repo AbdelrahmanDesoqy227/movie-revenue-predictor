@@ -146,7 +146,7 @@ movie_app/
 ├── model_regressor.pkl       # Trained XGBRegressor model
 ├── model_classifier.pkl      # Trained XGBClassifier model
 ├── preprocessing_utils.py    # Preprocessing functions
-├── NoteBook                  # NoteBook Code
+├── movie-success-prediction.ipynb                  # NoteBook Code
 ```
 
 ---
