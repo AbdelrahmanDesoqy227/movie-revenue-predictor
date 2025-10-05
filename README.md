@@ -1,20 +1,20 @@
 # 🎬 **Movie Revenue and Success Predictor**
 
-An advanced **Machine Learning web app** that predicts a movie’s **box office revenue** 💰 and **success likelihood** 🌟 based on metadata such as genres, keywords, production companies, cast, director, and budget.
+An advanced **Machine Learning web app** that predicts a movie’s **box office revenue** and **success likelihood**  based on metadata such as genres, keywords, production companies, cast, director, and budget.
 
 ---
 
-## 🧠 **Project Overview**
+##  **Project Overview**
 
 The goal of this project is to analyze and model the **TMDB 5000 Movies dataset** to:
-- 📈 Predict **movie revenue (regression)** using **XGBoost Regressor**
-- ✅ Classify **movie success (classification)** using **XGBoost Classifier**
+-  Predict **movie revenue (regression)** using **XGBoost Regressor**
+-  Classify **movie success (classification)** using **XGBoost Classifier**
 
 Both models were trained after deep **EDA**, advanced **feature engineering**, and **data preprocessing** to extract meaningful patterns from metadata.
 
 ---
 
-## 📊 **Dataset**
+##  **Dataset**
 
 - **Source:** [TMDB 5000 Movies Dataset on Kaggle](https://www.kaggle.com/datasets/tmdb/tmdb-movie-metadata)
 - **Total Movies:** ~5000  
@@ -23,12 +23,12 @@ Both models were trained after deep **EDA**, advanced **feature engineering**, a
 
 ---
 
-## 🔍 **Exploratory Data Analysis (EDA)**
+##  **Exploratory Data Analysis (EDA)**
 
 Performed detailed visual exploration to understand:
-- 🎭 Genre distributions  
-- 🎥 Top-grossing actors, directors, and production companies  
-- 💸 Correlations between budget, popularity, and revenue  
+-  Genre distributions  
+-  Top-grossing actors, directors, and production companies  
+-  Correlations between budget, popularity, and revenue  
 <img width="643" height="385" alt="Screenshot (75)" src="https://github.com/user-attachments/assets/d10f8894-3f84-4d90-8711-2c0ba8bf8f25" />
 <img width="585" height="378" alt="Screenshot (76)" src="https://github.com/user-attachments/assets/57a2533c-8e33-47e7-8679-a655ccecb8ff" />
 <img width="588" height="450" alt="Screenshot (77)" src="https://github.com/user-attachments/assets/ba37618d-f872-497b-a32a-ccc002127b37" />
@@ -51,7 +51,7 @@ Python, Pandas, NumPy, Matplotlib, Seaborn
 
 ---
 
-## ⚙️ **Feature Engineering & Preprocessing**
+##  **Feature Engineering & Preprocessing**
 
 * Built **global actor frequency** and **target revenue encodings**
 * Encoded genres, keywords, and companies into numerical representations
@@ -61,25 +61,25 @@ Python, Pandas, NumPy, Matplotlib, Seaborn
 
 ---
 
-## 🤖 **Modeling**
+##  **Modeling**
 
 Trained and evaluated two models:
 
 | Task                      | Model         | R² / Accuracy      | Description                                        |
 | ------------------------- | ------------- | ------------------ | -------------------------------------------------- |
-| 💰 Revenue Prediction     | XGBRegressor  | R² = **0.87**      | Predicts expected box office revenue               |
-| 🌟 Success Classification | XGBClassifier | Accuracy = **86%** | Predicts whether a movie will be successful or not |
+|  Revenue Prediction     | XGBRegressor  | R² = **0.87**      | Predicts expected box office revenue               |
+|  Success Classification | XGBClassifier | Accuracy = **86%** | Predicts whether a movie will be successful or not |
 
 ---
 
-## 🧪 **Evaluation Metrics**
+##  **Evaluation Metrics**
 
-### 🔹 Regression:
+###  Regression:
 
 * **RMSE:** 2.84
 * **R² Score:** 0.87
 
-### 🔹 Classification:
+###  Classification:
 
 |   Metric  | Class 0 | Class 1 |
 | :-------: | :-----: | :-----: |
@@ -87,21 +87,21 @@ Trained and evaluated two models:
 |   Recall  |   0.85  |   0.87  |
 |  F1-score |   0.87  |   0.85  |
 
-✅ **Overall Accuracy:** 86%
+ **Overall Accuracy:** 86%
 
 ---
 
-## 🖥️ **Streamlit Web Application**
+##  **Streamlit Web Application**
 
 Developed an interactive **Streamlit web app** that allows users to:
 
 * Enter movie details (genres, keywords, companies, actors, director, budget)
 * Run real-time predictions for:
 
-  * 🎯 **Revenue (numeric prediction)**
-  * ✅ **Success likelihood (classification)**
+  *  **Revenue (numeric prediction)**
+  *  **Success likelihood (classification)**
 
-### ▶️ How to Run Locally
+###  How to Run Locally
 
 ```bash
 pip install -r requirements.txt
@@ -110,7 +110,7 @@ streamlit run app.py
 
 ---
 
-## 🧩 **Tech Stack**
+##  **Tech Stack**
 
 ```
 Python | Pandas | NumPy | Seaborn | Scikit-learn | XGBoost | Matplotlib | Streamlit
@@ -118,7 +118,7 @@ Python | Pandas | NumPy | Seaborn | Scikit-learn | XGBoost | Matplotlib | Stream
 
 ---
 
-## 🧠 **Project Insights**
+##  **Project Insights**
 
 This project demonstrates:
 
@@ -129,7 +129,7 @@ This project demonstrates:
 
 ---
 
-## 🖼️ **Sample Preview**
+##  **Sample Preview**
 <img width="1366" height="590" alt="Screenshot (73)" src="https://github.com/user-attachments/assets/74232e15-7962-496b-a578-a51b9d0231aa" />
 <img width="1366" height="586" alt="Screenshot (74)" src="https://github.com/user-attachments/assets/9580fa42-fd74-4569-a6ef-4e5a0b896e17" />
 
@@ -137,7 +137,7 @@ This project demonstrates:
 
 ---
 
-## 📂 **Repository Structure**
+##  **Repository Structure**
 
 ```
 movie_app/
