@@ -1,67 +1,156 @@
-# movie-revenue-predictor
-1. Problem framing: two complementary tasks
+# 🎬 **Movie Revenue and Success Predictor**
 
-Regression (Revenue prediction) gives a continuous, actionable number that producers can use for ROI planning.
+An advanced **Machine Learning web app** that predicts a movie’s **box office revenue** 💰 and **success likelihood** 🌟 based on metadata such as genres, keywords, production companies, cast, director, and budget.
 
-Classification (Hit/Flop) converts business logic into an easy yes/no decision (e.g., where success = revenue > budget * threshold), which is often more interpretable for stakeholders.
+---
 
-Having both tasks allows cross-validation of results: if both predict "high revenue" and "hit", confidence increases.
+## 🧠 **Project Overview**
 
-2. Target transform (log scale)
+The goal of this project is to analyze and model the **TMDB 5000 Movies dataset** to:
+- 📈 Predict **movie revenue (regression)** using **XGBoost Regressor**
+- ✅ Classify **movie success (classification)** using **XGBoost Classifier**
 
-Movie revenues are heavily right-skewed (orders of magnitude). Training the regressor on log(revenue + 1) stabilizes variance, improves model convergence, and makes errors more meaningful.
+Both models were trained after deep **EDA**, advanced **feature engineering**, and **data preprocessing** to extract meaningful patterns from metadata.
 
-At inference we invert predictions using expm1() to present human-readable whole-dollar revenues.
+---
 
-3. Handling high-cardinality categorical features (actors, director, companies)
+## 📊 **Dataset**
 
-Why not naive One-Hot?
-One-Hot causes huge dimensionality (sparse thousands of columns) and overfitting when applied to actors / keywords / companies.
+- **Source:** [TMDB 5000 Movies Dataset on Kaggle](https://www.kaggle.com/datasets/tmdb/tmdb-movie-metadata)
+- **Total Movies:** ~5000  
+- **Features Used:**  
+  Genres, Keywords, Production Companies, Actors, Director, and Budget.
 
-Chosen approach:
+---
 
-CountVectorizer / Count features for genres, keywords, and production_companies (limited max_features) to capture presence patterns without exploding dimensionality.
+## 🔍 **Exploratory Data Analysis (EDA)**
 
-Global actor encoding (the deep improvement): instead of separate actor_1/2/3 encodings, build a global actor frequency and global actor mean-revenue mapping aggregated across all positions. This captures each actor’s overall influence, independent of the column position.
+Performed detailed visual exploration to understand:
+- 🎭 Genre distributions  
+- 🎥 Top-grossing actors, directors, and production companies  
+- 💸 Correlations between budget, popularity, and revenue  
 
-Director encoded by frequency + mean-revenue (directors have strong signal).
+EDA was done using:
+```python
+Python, Pandas, NumPy, Matplotlib, Seaborn
+````
 
-Frequency encoding captures how often a name appears (popularity / experience).
+---
 
-Target encoding captures historical average revenue associated with that entity (direct signal).
+## ⚙️ **Feature Engineering & Preprocessing**
 
-Missing / unseen entities: fallback to 0 (frequency) and global_mean_revenue (target) to avoid crashes and provide neutral assumptions.
+* Built **global actor frequency** and **target revenue encodings**
+* Encoded genres, keywords, and companies into numerical representations
+* Created **actor-level statistics** combining actor_1, actor_2, and actor_3
+* Filled missing values intelligently to maintain data consistency
+* Split dataset into **train/test sets** for fair evaluation
 
-4. Preventing data leakage
+---
 
-All encoding maps (freq and target dictionaries) must be built only on the training set and then saved. During inference or validation, we only use those saved maps (never recompute using test/validation labels).
+## 🤖 **Modeling**
 
-Target encoding includes the risk of leakage if computed on full dataset — ensure per-fold target-encoding or smoothing if used inside CV/hyperparameter tuning (not required for a deployment-ready single-model demonstration but crucial for production-grade pipelines).
+Trained and evaluated two models:
 
-5. Feature composition & scaling
+| Task                      | Model         | R² / Accuracy      | Description                                        |
+| ------------------------- | ------------- | ------------------ | -------------------------------------------------- |
+| 💰 Revenue Prediction     | XGBRegressor  | R² = **0.87**      | Predicts expected box office revenue               |
+| 🌟 Success Classification | XGBClassifier | Accuracy = **86%** | Predicts whether a movie will be successful or not |
 
-Tree-based models (XGBoost) are robust to feature scaling; we avoid unnecessary scaling for most features.
+---
 
-Numeric features (budget, actor targets) preserved as raw (budget often log-transformed during training pipeline).
+## 🧪 **Evaluation Metrics**
 
-We limit vectorizer sizes (e.g., top 200 keywords) to keep the feature matrix manageable.
+### 🔹 Regression:
 
-6. Model choice
+* **RMSE:** 2.84
+* **R² Score:** 0.87
 
-XGBoost chosen for its robustness, handling of heterogeneous features, speed, and interpretability (feature importance).
+### 🔹 Classification:
 
-We built two separate XGBoost models:
+|   Metric  | Class 0 | Class 1 |
+| :-------: | :-----: | :-----: |
+| Precision |   0.88  |   0.84  |
+|   Recall  |   0.85  |   0.87  |
+|  F1-score |   0.87  |   0.85  |
 
-XGBRegressor for revenue (trained on log_revenue).
+✅ **Overall Accuracy:** 86%
 
-XGBClassifier for success (binary).
+---
 
-Baselines (Linear Regression / Logistic Regression) were used for comparison.
+## 🖥️ **Streamlit Web Application**
 
-7. Evaluation & interpretation
+Developed an interactive **Streamlit web app** that allows users to:
 
-Regression reported on log-scale (RMSE) and R². Remember to invert for business reporting.
+* Enter movie details (genres, keywords, companies, actors, director, budget)
+* Run real-time predictions for:
 
-Classification uses accuracy, precision, recall, f1, and confusion matrix to show the trade-offs between false positives/negatives.
+  * 🎯 **Revenue (numeric prediction)**
+  * ✅ **Success likelihood (classification)**
 
-Explainability: feature importance (from XGBoost) helps identify which features (budget, actor_target, genres flags, director_target) drive predictions.
+### ▶️ How to Run Locally
+
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+---
+
+## 🧩 **Tech Stack**
+
+```
+Python | Pandas | NumPy | Seaborn | Scikit-learn | XGBoost | Matplotlib | Streamlit
+```
+
+---
+
+## 🧠 **Project Insights**
+
+This project demonstrates:
+
+* End-to-end **ML pipeline development**
+* Integration of **regression and classification models**
+* Advanced **feature engineering** from unstructured text data
+* **Streamlit deployment** for user interaction
+<img width="643" height="385" alt="Screenshot (75)" src="https://github.com/user-attachments/assets/d10f8894-3f84-4d90-8711-2c0ba8bf8f25" />
+<img width="585" height="378" alt="Screenshot (76)" src="https://github.com/user-attachments/assets/57a2533c-8e33-47e7-8679-a655ccecb8ff" />
+<img width="588" height="450" alt="Screenshot (77)" src="https://github.com/user-attachments/assets/ba37618d-f872-497b-a32a-ccc002127b37" />
+<img width="458" height="326" alt="Screenshot (78)" src="https://github.com/user-attachments/assets/be2c7f9e-20b1-437a-8844-9b7f498f7123" />
+<img width="672" height="451" alt="Screenshot (79)" src="https://github.com/user-attachments/assets/03c88e5a-4fee-4912-9410-bd716719a61a" />
+<img width="665" height="433" alt="Screenshot (80)" src="https://github.com/user-attachments/assets/a8bf8a16-7f83-4da5-b3a9-d8da16e0e665" />
+<img width="644" height="431" alt="Screenshot (81)" src="https://github.com/user-attachments/assets/0182a1e2-c57f-412c-a87b-759e2e0ebd4a" />
+<img width="434" height="463" alt="Screenshot (82)" src="https://github.com/user-attachments/assets/2f3b9d18-02ec-4e2a-b29d-05668dc8bec0" />
+<img width="463" height="446" alt="Screenshot (83)" src="https://github.com/user-attachments/assets/01694f93-4dfa-46aa-86ba-a93e66c9665a" />
+<img width="816" height="360" alt="Screenshot (84)" src="https://github.com/user-attachments/assets/b91a0cdc-5ca4-416b-bd6e-ee6220f90cf2" />
+<img width="399" height="182" alt="Screenshot (85)" src="https://github.com/user-attachments/assets/548e7863-7793-482f-95ef-d498271509c9" />
+<img width="606" height="407" alt="Screenshot (86)" src="https://github.com/user-attachments/assets/b4888c05-8a4b-4f55-914e-0ad4f1d7aa6b" />
+<img width="412" height="316" alt="Screenshot (87)" src="https://github.com/user-attachments/assets/58349254-66ff-43db-b78a-43d58d80d0f2" />
+
+---
+
+## 🖼️ **Sample Preview**
+<img width="1366" height="590" alt="Screenshot (73)" src="https://github.com/user-attachments/assets/74232e15-7962-496b-a578-a51b9d0231aa" />
+<img width="1366" height="586" alt="Screenshot (74)" src="https://github.com/user-attachments/assets/9580fa42-fd74-4569-a6ef-4e5a0b896e17" />
+
+
+
+---
+
+## 📂 **Repository Structure**
+
+```
+movie_app/
+│
+├── app.py                   # Streamlit main file
+├── requirements.txt          # Dependencies
+├── model_regressor.pkl       # Trained XGBRegressor model
+├── model_classifier.pkl      # Trained XGBClassifier model
+├── preprocessing_utils.py    # Preprocessing functions
+├── NoteBook                  # NoteBook Code
+```
+
+---
+
+⭐ **If you like this project, give it a star on GitHub!**
+
+```
