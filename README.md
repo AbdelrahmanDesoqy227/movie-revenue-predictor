@@ -34,8 +34,6 @@ Performed detailed visual exploration to understand:
 <img width="588" height="450" alt="Screenshot (77)" src="https://github.com/user-attachments/assets/ba37618d-f872-497b-a32a-ccc002127b37" />
 <img width="458" height="326" alt="Screenshot (78)" src="https://github.com/user-attachments/assets/be2c7f9e-20b1-437a-8844-9b7f498f7123" />
 <img width="672" height="451" alt="Screenshot (79)" src="https://github.com/user-attachments/assets/03c88e5a-4fee-4912-9410-bd716719a61a" />
-<img width="665" height="433" alt="Screenshot (80)" src="https://github.com/user-attachments/assets/a8bf8a16-7f83-4da5-b3a9-d8da16e0e665" />
-<img width="644" height="431" alt="Screenshot (81)" src="https://github.com/user-attachments/assets/0182a1e2-c57f-412c-a87b-759e2e0ebd4a" />
 <img width="434" height="463" alt="Screenshot (82)" src="https://github.com/user-attachments/assets/2f3b9d18-02ec-4e2a-b29d-05668dc8bec0" />
 <img width="463" height="446" alt="Screenshot (83)" src="https://github.com/user-attachments/assets/01694f93-4dfa-46aa-86ba-a93e66c9665a" />
 <img width="816" height="360" alt="Screenshot (84)" src="https://github.com/user-attachments/assets/b91a0cdc-5ca4-416b-bd6e-ee6220f90cf2" />
